@@ -63,10 +63,32 @@ def plus_grand(mots_possibles):
 L1 = [(['A','E','I','L','N','O','R','S','T','U'],1)]
 L2 = [(['D','G','M'],2)]
 L3 = [(['B','C','P'],3)]
-L4 = [(['F','H','V'],4)]
+L4 = [(['F','H','V'],4)]                    # Chaque liste est associé avec sa valeur
 L5 = [(['J','Q'],8)]
 L6 = [(['K','W','X','Y','Z'],10)]
 
 L = L1 + L2 + L3 + L4 + L5 + L6
+n = len(L)
+
+def score(mot):
+    if  len(mot)==1:
+        for (lettres,s) in L :
+            if mot[0] in lettres:
+                return s
+
+    s = 0           # Disjonction de cas en fonction du nombre de lettres
+    for c in mot :
+        s+=score(c)
+    return s
+
+def max_score(liste_mots) :
+    max_score = 0
+    max_mot = ""
+    for mot in liste_mots:
+        s = score(mot)                            # Comparaison au score max
+        if s > max_score :
+            max_score = s
+            max_mot = mot
+    return (max_mot,max_score)
 
 
